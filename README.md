@@ -23,29 +23,8 @@ During a single visual prefill, ReAccess builds a compact associative memory. Su
 - **Retrieve:** progressively recall complementary visual evidence from compact memory.
 - **Guide:** integrate retrieved evidence into the model's native computation.
 
-The project page includes the motivation, method framework, main results, efficiency analysis, and qualitative visualizations from the paper.
-
-## Repository branches
-
-| Branch | Purpose |
-| --- | --- |
-| [`main`](https://github.com/ryu1ion/reaccess/tree/main) | Research code and documentation. The implementation will be added after review. |
-| [`gh-pages`](https://github.com/ryu1ion/reaccess/tree/gh-pages) | Project website and its assets, deployed through GitHub Pages. |
-
 ## Citation
 
 ```bibtex
-@misc{chen_reaccess,
-  title  = {ReAccess: Look Once, Stay Focused with
-            Efficient Test Time Memory},
-  author = {Chen, Tianhao and Fan, Yilong and Wu, Yuheng
-            and Hu, Xiaobin and Lee, Dongman},
-  note   = {Manuscript}
-}
+
 ```
-
-Publication metadata will be updated when available.
-
-## License
-
-See [LICENSE](LICENSE) for the repository's MIT license. The project website's design credits and third-party asset licenses are documented on the `gh-pages` branch; paper and research assets remain with their respective authors.
