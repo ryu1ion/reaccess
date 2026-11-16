@@ -1,7 +1,7 @@
 {
   "source_project": "../CVPR2027__Arxiv_",
   "paper_pages": 18,
-  "paper_sha256": "a38c6c3ef7a6623cbbac283266bb940975bc4057acb3f53c4f8dbdc48ea48df2",
+  "paper_sha256": "e07c02e83a78f8fd52b42a7331ffb19c3bc45db13242c9990bf9ca80a7abc328",
   "compilation": "Table extraction source: Tectonic; OT1 font encoding added only to a temporary source copy to preserve pdfLaTeX Times fonts. Downloadable manuscript supplied separately by the authors.",
   "rendering": "Poppler pdftoppm; PDF figures copied unchanged; tables cropped from compiled paper without redrawing.",
   "assets": {
@@ -103,6 +103,6 @@
     }
   },
   "table_source_paper_sha256": "baf908966488c276a198ad29e3a48d33b268ab26f36f4e9dfb320ace1d148b74",
-  "paper_source": "../reaccess.pdf",
+  "paper_source": "../new.pdf",
   "paper_original_pdf_unchanged": true
 }

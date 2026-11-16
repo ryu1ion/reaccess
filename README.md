@@ -38,7 +38,7 @@ In the repository's **Settings → Pages**, the publishing source is **Deploy fr
 - The motivation, framework, efficiency, and visualization PDFs are copied unchanged from the paper project.
 - Table 2 and Table 3 are cropped from the compiled paper PDF and rendered as images. They are not rebuilt as HTML tables.
 - High-resolution PNG previews are in `assets/figures/`; the original PDFs and downloadable manuscript are in `assets/pdf/`.
-- The downloadable manuscript is copied unchanged from the authors' supplied `reaccess.pdf`.
+- The downloadable manuscript is copied unchanged from the authors' supplied `new.pdf`.
 - `assets/provenance.json` records the source files, hashes, rendering dimensions, and table crop locations.
 - Every research figure on the page supports enlargement and links to its PDF.
 
