@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8fafb">
+  <meta name="description" content="ReAccess keeps question-relevant visual evidence accessible through compact test-time memory, improving frozen vision-language models with a single visual prefill.">
+  <meta name="author" content="Tianhao Chen, Yilong Fan, Yuheng Wu, Xiaobin Hu, Dongman Lee">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="ReAccess: Look Once, Stay Focused with Efficient Test Time Memory">
+  <meta property="og:description" content="A lightweight evidence memory for frozen vision-language models. Preserve what matters. Retrieve it when needed.">
+  <meta property="og:url" content="https://ryu1ion.github.io/reaccess/">
+  <meta property="og:image" content="https://ryu1ion.github.io/reaccess/assets/figures/framework.png">
+  <link rel="canonical" href="https://ryu1ion.github.io/reaccess/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="ReAccess: Look Once, Stay Focused with Efficient Test Time Memory">
+  <meta name="citation_author" content="Chen, Tianhao">
+  <meta name="citation_author" content="Fan, Yilong">
+  <meta name="citation_author" content="Wu, Yuheng">
+  <meta name="citation_author" content="Hu, Xiaobin">
+  <meta name="citation_author" content="Lee, Dongman">
+  <meta name="citation_pdf_url" content="https://ryu1ion.github.io/reaccess/assets/pdf/reaccess-paper.pdf">
+  <title>ReAccess — Look Once, Stay Focused</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#overview">Skip to content</a>
+  <svg class="icon-definitions" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="icon-file" viewBox="0 0 24 24"><path d="M13 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9zm0 0v6h6M9 13h6m-6 4h6"/></symbol>
+    <symbol id="icon-expand" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5M3 3l6 6m12-6-6 6M3 21l6-6m12 6-6-6"/></symbol>
+    <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></symbol>
+    <symbol id="icon-code" viewBox="0 0 24 24"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 4l-4 16"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="wordmark" href="#top" aria-label="ReAccess home"><span class="memory-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>ReAccess<span class="wordmark-period">.</span></a>
+      <div class="nav-links">
+        <a href="#overview">Overview</a><a href="#method">Method</a><a href="#results">Results</a><a href="#visualization">Visualizations</a>
+      </div>
+      <a class="nav-paper" href="assets/pdf/reaccess-paper.pdf" target="_blank" rel="noopener">Paper <svg class="icon"><use href="#icon-arrow"/></svg></a>
+    </nav>
+    <div class="reading-progress" aria-hidden="true"></div>
+  </header>
+
+  <main id="top">
+    <section class="hero container" aria-labelledby="paper-title">
+      <div class="eyebrow hero-eyebrow"><span class="status-dot"></span> Vision–language models <span class="eyebrow-divider">/</span> Test-time memory</div>
+      <h1 id="paper-title"><span class="project-name">ReAccess</span><span class="title-main">Look Once, Stay Focused</span><span class="title-sub">with Efficient Test Time Memory</span></h1>
+      <p class="hero-summary">The evidence is already there. <br>Keep it <span class="accent-text">within reach.</span></p>
+      <div class="authors" aria-label="Authors">
+        <span>Tianhao Chen<sup>1</sup></span><span>Yilong Fan<sup>2</sup></span><span>Yuheng Wu<sup>1</sup></span><span>Xiaobin Hu<sup>3,*</sup></span><span>Dongman Lee<sup>1,*</sup></span>
+      </div>
+      <div class="affiliations"><span><sup>1</sup> KAIST</span><span><sup>2</sup> Tianjin University</span><span><sup>3</sup> National University of Singapore</span></div>
+      <p class="author-note">* Co-corresponding authors</p>
+      <div class="hero-actions">
+        <a class="button button-primary" href="assets/pdf/reaccess-paper.pdf" target="_blank" rel="noopener"><svg class="icon"><use href="#icon-file"/></svg> Read the paper <span class="button-tag">PDF</span></a>
+        <a class="button button-secondary" href="https://github.com/ryu1ion/reaccess" target="_blank" rel="noopener" aria-label="Code on GitHub; research code will be released after review"><svg class="icon"><use href="#icon-code"/></svg> Code <span aria-hidden="true">↗</span></a>
+        <a class="button button-secondary" href="#method">Explore the method <svg class="icon"><use href="#icon-arrow"/></svg></a>
+        <a class="citation-link" href="#citation">BibTeX <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="code-release-note">Code will be publicly released after the review process is complete.</p>
+      <div class="hero-facts" aria-label="Research highlights">
+        <div><strong>1</strong><span>visual prefill</span></div>
+        <div><strong>64 <span class="times">×</span> 64</strong><span>memory per layer</span></div>
+        <div><strong>8</strong><span>VLM backbones</span></div>
+        <div><strong>12</strong><span>understanding benchmarks</span></div>
+      </div>
+    </section>
+
+    <section class="overview section-tinted" id="overview" aria-labelledby="overview-title">
+      <div class="container">
+        <div class="section-intro overview-intro">
+          <p class="eyebrow"><span class="section-number">01</span> The core idea</p>
+          <h2 id="overview-title">Seeing the evidence<br>is only the beginning.</h2>
+          <p class="section-lead">A VLM can encode the right visual details and still fail to use them. The missing link is <strong>sustained access to the evidence that matters.</strong></p>
+        </div>
+        <div class="overview-copy">
+          <p>Answering a visual question often depends on a few small clues, interpreted within the broader scene. Repeatedly inspecting the image adds cost, while long textual reasoning can draw attention away from the very evidence needed for the answer.</p>
+          <p><strong>ReAccess connects evidence preservation with evidence utilization.</strong> It builds a compact, question-conditioned memory during a single visual prefill, then progressively retrieves complementary evidence to steer the frozen VLM’s attention and hidden representations.</p>
+        </div>
+        <div class="principles">
+          <div><span class="principle-index">01 / Preserve</span><h3>Remember what matters.</h3><p>Store question-relevant visual associations while keeping the original image context.</p></div>
+          <div><span class="principle-index">02 / Retrieve</span><h3>Return to the evidence.</h3><p>Use successive memory reads to recover complementary details as computation evolves.</p></div>
+          <div><span class="principle-index">03 / Guide</span><h3>Make memory actionable.</h3><p>Let retrieved evidence guide attention queries and refine the model’s representations.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="motivation" aria-labelledby="motivation-title">
+      <div class="section-heading"><div><p class="eyebrow">The motivation</p><h2 id="motivation-title">Encoded does not mean utilized.</h2></div><span class="section-side-note">From representation to reliable access</span></div>
+      <p class="section-description">Our analysis reveals why richer visual information alone does not guarantee better answers.</p>
+      <figure class="paper-figure">
+        <a class="figure-image" href="assets/figures/motivation.png" data-lightbox data-title="Visual evidence accessibility in VLMs" data-pdf="assets/pdf/motivation.pdf" aria-label="Enlarge the motivation figure">
+          <img src="assets/figures/motivation.png" alt="Six-panel motivation analysis: global-local complementarity, evidence reuse versus image magnification, gains by evidence attention, explicit reasoning cost, evidence attention decay, and text-vision attention competition." loading="lazy" decoding="async" width="3200" height="1497">
+          <span class="expand-badge"><svg class="icon"><use href="#icon-expand"/></svg> Enlarge</span>
+        </a>
+        <figcaption><span><strong>Figure 1.</strong> Visual evidence accessibility in VLMs. Focused evidence complements global context, yet its influence can fade as reasoning text accumulates.</span><a href="assets/pdf/motivation.pdf" target="_blank" rel="noopener">Original PDF ↗</a></figcaption>
+      </figure>
+      <div class="observation-grid">
+        <article><span class="observation-label">Observation 01</span><h3>Small clues need a bigger picture.</h3><p>Relevant regions occupy only <strong>2.8% of visual tokens</strong>. Isolating them hurts accuracy; combining them with the full image helps.</p></article>
+        <article><span class="observation-label">Observation 02</span><h3>More reasoning can mean less grounding.</h3><p>As reasoning text grows, attention shifts away from the image. Evidence can remain encoded while losing influence on the answer.</p></article>
+        <article><span class="observation-label">Observation 03</span><h3>Useful evidence can stay compact.</h3><p>Probing low-dimensional hidden states recovers substantial visual information, motivating a small, queryable evidence memory.</p></article>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="method" aria-labelledby="method-title">
+      <div class="container">
+        <div class="section-heading"><div><p class="eyebrow"><span class="section-number">02</span> The method</p><h2 id="method-title">A small memory. An active role.</h2></div><span class="section-side-note">One prefill · Progressive evidence recall</span></div>
+        <p class="section-description">ReAccess turns visual memory into a mechanism for evidence-grounded reasoning, while preserving the VLM’s original visual pathway.</p>
+        <figure class="paper-figure">
+          <a class="figure-image" href="assets/figures/framework.png" data-lightbox data-title="The ReAccess framework" data-pdf="assets/pdf/framework.pdf" aria-label="Enlarge the ReAccess framework">
+            <img src="assets/figures/framework.png" alt="ReAccess framework. Question-conditioned memory construction writes visual associations during one prefill. Two progressive reads steer attention queries and outputs at each frozen Transformer layer." loading="lazy" decoding="async" width="3200" height="1300">
+            <span class="expand-badge"><svg class="icon"><use href="#icon-expand"/></svg> Enlarge</span>
+          </a>
+          <figcaption><span><strong>Figure 2.</strong> Memory construction preserves question-relevant visual associations; memory utilization retrieves complementary evidence and steers the frozen VLM.</span><a href="assets/pdf/framework.pdf" target="_blank" rel="noopener">Original PDF ↗</a></figcaption>
+        </figure>
+        <div class="method-details">
+          <article><span class="method-label construction">Memory construction</span><h3>Write once, with the question in mind.</h3><p>Spatially aware features and question-conditioned weights organize visual key–value associations into a compact <strong>64 × 64 memory at each layer</strong>.</p></article>
+          <article><span class="method-label utilization">Memory utilization</span><h3>Read progressively, guide directly.</h3><p>Two successive reads retrieve complementary evidence. Their outputs steer both the native attention query and the hidden representation used for prediction.</p></article>
+        </div>
+        <div class="training-note"><span class="note-symbol" aria-hidden="true">↳</span><p><strong>Frozen backbone, lightweight learning.</strong> On Qwen2.5-VL-7B, ReAccess trains 58M memory-module parameters (about 0.7% of the full model) for one epoch. Inference uses a single visual prefill, without explicit intermediate reasoning traces.</p></div>
+      </div>
+    </section>
+
+    <section class="section container results-section" id="results" aria-labelledby="results-title">
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-number">03</span> The results</p><h2 id="results-title">Better access. Better answers.</h2></div><a class="text-link" href="assets/pdf/reaccess-paper.pdf" target="_blank" rel="noopener">Full experimental details <svg class="icon"><use href="#icon-arrow"/></svg></a></div>
+      <p class="section-description">Consistent gains across model families, followed by a closer look at challenging visual perception and reasoning.</p>
+      <div class="result-heading"><span class="table-label">Table 2</span><div><h3>Generalization across VLM backbones</h3><p>Eight backbones. Twelve benchmarks. Improvements across every model–benchmark pair.</p></div></div>
+      <figure class="paper-figure table-figure">
+        <a class="figure-image" href="assets/figures/table2.png" data-lightbox data-title="Table 2 · General visual understanding" data-pdf="assets/pdf/table2.pdf" aria-label="Enlarge Table 2, general visual understanding results">
+          <img src="assets/figures/table2.png" alt="Table 2 from the paper. Baseline and ReAccess scores for eight VLM backbones on GQA, MMBench, MMStar, TextVQA, DocVQA, InfoVQA, ChartQA, AI2D, OCRBench, MMMU, LogicVista, and POPE. Every backbone improves on all twelve benchmarks." loading="lazy" decoding="async" width="3200" height="1256">
+          <span class="expand-badge"><svg class="icon"><use href="#icon-expand"/></svg> Enlarge</span>
+        </a>
+        <figcaption><span><strong>General visual understanding.</strong> The original paper table, including all backbone scores and absolute improvements.</span><a href="assets/pdf/table2.pdf" target="_blank" rel="noopener">Table PDF ↗</a></figcaption>
+      </figure>
+      <div class="result-takeaway"><span class="takeaway-line" aria-hidden="true"></span><p><strong>Up to 16.6% relative improvement</strong> — from 30.7 to 35.8 on InfoVQA with LLaVA-NeXT-7B. Gains extend across perception, documents, charts, and reasoning.</p></div>
+      <div class="result-heading result-heading-second"><span class="table-label">Table 3</span><div><h3>Competitive perception with a single pass</h3><p>A comparison with multi-turn, two-stage, and single-pass methods on Qwen2.5-VL-7B.</p></div></div>
+      <figure class="paper-figure table-figure">
+        <a class="figure-image" href="assets/figures/table3.png" data-lightbox data-title="Table 3 · Comparison with representative methods" data-pdf="assets/pdf/table3.pdf" aria-label="Enlarge Table 3, comparison with representative methods">
+          <img src="assets/figures/table3.png" alt="Table 3 from the paper. ReAccess is compared with multi-turn, two-stage, and single-pass methods on HR-Bench 4K and 8K, V-star attributes and spatial reasoning, and CV-Bench. ReAccess scores 73.3, 71.8, 84.4, 82.9, 83.8, and 78.8 in the six reported columns." loading="lazy" decoding="async" width="3200" height="1741">
+          <span class="expand-badge"><svg class="icon"><use href="#icon-expand"/></svg> Enlarge</span>
+        </a>
+        <figcaption><span><strong>Fine-grained perception and reasoning.</strong> All methods use Qwen2.5-VL-7B. The dagger (†) marks single-prefill variants.</span><a href="assets/pdf/table3.pdf" target="_blank" rel="noopener">Table PDF ↗</a></figcaption>
+      </figure>
+      <div class="result-highlights">
+        <div><span class="highlight-value">+4.9<span>pp</span></span><p>HR-Bench 8K<br><span>66.9% → 71.8%</span></p></div>
+        <div><span class="highlight-value">+5.3<span>pp</span></span><p>V* spatial accuracy<br><span>77.6% → 82.9%</span></p></div>
+        <div><span class="highlight-value">78.8<span>%</span></span><p>CV-Bench accuracy<br><span>77.7% → 78.8%</span></p></div>
+      </div>
+    </section>
+
+    <section class="section section-tinted" id="efficiency" aria-labelledby="efficiency-title">
+      <div class="container efficiency-layout">
+        <div class="efficiency-copy"><p class="eyebrow">The efficiency</p><h2 id="efficiency-title">Stay grounded.<br>Keep moving.</h2><p>ReAccess retrieves evidence directly from hidden states, keeping the inference procedure consistent across tasks.</p><div class="efficiency-stat"><strong>≈6<span>%</span></strong><p>additional latency over the frozen model, on average</p></div><p class="small-copy">The paper reports approximately 10× average speedup over reasoning-intensive methods such as Thyme-RL and DeepEyes.</p></div>
+        <figure class="paper-figure efficiency-figure">
+          <a class="figure-image" href="assets/figures/efficiency.png" data-lightbox data-title="Inference efficiency across four settings" data-pdf="assets/pdf/efficiency.pdf" aria-label="Enlarge inference efficiency comparison"><img src="assets/figures/efficiency.png" alt="Inference latency in seconds per sample across HR-Bench 8K, HR-Bench 4K, V-star, and MMMU. ReAccess stays close to the frozen backbone and is faster than the compared methods." loading="lazy" decoding="async" width="2400" height="1392"><span class="expand-badge"><svg class="icon"><use href="#icon-expand"/></svg> Enlarge</span></a>
+          <figcaption><span>Inference latency across four evaluation settings.</span><a href="assets/pdf/efficiency.pdf" target="_blank" rel="noopener">Original PDF ↗</a></figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section container visualization-section" id="visualization" aria-labelledby="visualization-title">
+      <div class="section-heading"><div><p class="eyebrow"><span class="section-number">04</span> Inside the memory</p><h2 id="visualization-title">Watch the evidence come into focus.</h2></div></div>
+      <p class="section-description">Successive memory reads attend to complementary clues, connecting the details needed for a grounded answer.</p>
+      <figure class="paper-figure visualization-figure">
+        <a class="figure-image" href="assets/figures/visualization.png" data-lightbox data-title="Visualizing progressive evidence retrieval" data-pdf="assets/pdf/visualization.pdf" aria-label="Enlarge evidence retrieval visualizations">
+          <img src="assets/figures/visualization.png" alt="Qualitative results for a bird and a bench. Original attention overlooks the bird's leg and misidentifies the bench's surroundings. ReAccess read one attends to the bill or bench; read two attends to the leg or surrounding path, producing the correct answers Yes and Path." loading="lazy" decoding="async" width="3200" height="1645"><span class="expand-badge"><svg class="icon"><use href="#icon-expand"/></svg> Enlarge</span>
+        </a>
+        <figcaption><span><strong>Evidence preservation and utilization.</strong> Original attention and two successive ReAccess memory reads, shown on the same image–question pairs.</span><a href="assets/pdf/visualization.pdf" target="_blank" rel="noopener">Original PDF ↗</a></figcaption>
+      </figure>
+      <div class="visualization-notes">
+        <article><span class="example-label">Example 01 / Fine-grained attributes</span><h3>From the bill to the leg.</h3><p>The original model focuses on the bird’s bill and overlooks its leg. Two complementary reads recover both details, changing the answer from <span class="answer-wrong">No</span> to <span class="answer-right">Yes</span>.</p></article>
+        <article><span class="example-label">Example 02 / Spatial context</span><h3>From the object to its surroundings.</h3><p>ReAccess first localizes the bench, then retrieves evidence from the surrounding path, refining the answer from <span class="answer-wrong">Park</span> to <span class="answer-right">Path</span>.</p></article>
+      </div>
+      <div class="closing-line"><span class="memory-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span><p>Look once. <span>Keep the evidence in reach.</span></p></div>
+    </section>
+
+    <section class="citation-section section-tinted" id="citation" aria-labelledby="citation-title">
+      <div class="container citation-layout">
+        <div><p class="eyebrow">Reference</p><h2 id="citation-title">Cite this work</h2><p>ReAccess manuscript</p><a class="text-link" href="assets/pdf/reaccess-paper.pdf" target="_blank" rel="noopener">Read the full paper <svg class="icon"><use href="#icon-arrow"/></svg></a></div>
+        <div class="citation-code"><button class="copy-button" type="button" id="copy-citation"><svg class="icon"><use href="#icon-copy"/></svg><span>Copy BibTeX</span></button><pre><code id="bibtex">@misc{chen_reaccess,
+  title  = {ReAccess: Look Once, Stay Focused with
+            Efficient Test Time Memory},
+  author = {Chen, Tianhao and Fan, Yilong and Wu, Yuheng
+            and Hu, Xiaobin and Lee, Dongman},
+  note   = {Manuscript}
+}</code></pre><span class="sr-only" id="copy-status" role="status" aria-live="polite"></span></div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer container"><a class="wordmark" href="#top">ReAccess<span class="wordmark-period">.</span></a><p>Design adapted from <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank" rel="noopener">Academic Project Page Template</a> and <a href="https://github.com/nerfies/nerfies.github.io" target="_blank" rel="noopener">Nerfies</a>.<br>Website design: <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">CC BY-SA 4.0</a>. Paper and research assets remain with their authors.</p><a class="back-to-top" href="#top">Back to top ↑</a></footer>
+
+  <dialog id="figure-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-toolbar"><h2 id="dialog-title">Figure</h2><div class="dialog-actions"><button id="zoom-toggle" type="button">Zoom in</button><a id="dialog-pdf" href="assets/pdf/framework.pdf" target="_blank" rel="noopener">Open PDF ↗</a><button class="dialog-close" id="dialog-close" type="button" aria-label="Close figure"><svg class="icon"><use href="#icon-close"/></svg></button></div></div>
+    <div class="dialog-image-area" id="dialog-image-area"><img id="dialog-image" alt=""></div>
+    <p class="dialog-hint">Click the image to zoom · Scroll to explore · Esc to close</p>
+  </dialog>
+</body>
+</html>

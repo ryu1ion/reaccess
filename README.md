@@ -1,51 +1,53 @@
-# ReAccess
+# ReAccess project page
 
-## Look Once, Stay Focused with Efficient Test Time Memory
+The project website for **ReAccess: Look Once, Stay Focused with Efficient Test Time Memory**.
 
-**Tianhao Chen · Yilong Fan · Yuheng Wu · Xiaobin Hu · Dongman Lee**  
-KAIST · Tianjin University · National University of Singapore
+**Live site:** https://ryu1ion.github.io/reaccess/
 
-[Project Page](https://ryu1ion.github.io/reaccess/) · [Paper](https://ryu1ion.github.io/reaccess/assets/pdf/reaccess-paper.pdf)
+**Research repository:** https://github.com/ryu1ion/reaccess/tree/main
 
-## Code release
+> The research code will be publicly released after the review process is complete.
 
-> **The code will be publicly released after the review process is complete.**
+## Branches
 
-This is the official repository for ReAccess. The research implementation is not yet available; this repository will be updated with the code after review.
+- `main` contains the research documentation and is reserved for the research implementation.
+- `gh-pages` contains this static website, rendered figures, and paper PDFs. GitHub Pages publishes from the root of this branch.
 
-## Overview
+Website changes should be committed to `gh-pages`; they do not need to be merged into `main`.
 
-Vision-language models can encode important visual details without effectively using them to answer a question. **ReAccess** addresses this gap with a lightweight test-time evidence memory that preserves question-relevant visual information and keeps it accessible throughout reasoning.
+## Local preview
 
-During a single visual prefill, ReAccess builds a compact associative memory. Successive reads retrieve complementary evidence and steer both attention queries and hidden representations of the frozen VLM, improving visual grounding without repeated image encoding or explicit intermediate reasoning traces.
+The website uses plain HTML, CSS, and JavaScript. No build step or package installation is required.
 
-- **Preserve:** organize question-relevant visual associations while retaining the original image context.
-- **Retrieve:** progressively recall complementary visual evidence from compact memory.
-- **Guide:** integrate retrieved evidence into the model's native computation.
-
-The project page includes the motivation, method framework, main results, efficiency analysis, and qualitative visualizations from the paper.
-
-## Repository branches
-
-| Branch | Purpose |
-| --- | --- |
-| [`main`](https://github.com/ryu1ion/reaccess/tree/main) | Research code and documentation. The implementation will be added after review. |
-| [`gh-pages`](https://github.com/ryu1ion/reaccess/tree/gh-pages) | Project website and its assets, deployed through GitHub Pages. |
-
-## Citation
-
-```bibtex
-@misc{chen_reaccess,
-  title  = {ReAccess: Look Once, Stay Focused with
-            Efficient Test Time Memory},
-  author = {Chen, Tianhao and Fan, Yilong and Wu, Yuheng
-            and Hu, Xiaobin and Lee, Dongman},
-  note   = {Manuscript}
-}
+```sh
+git clone --branch gh-pages --single-branch git@github.com:ryu1ion/reaccess.git reaccess-site
+cd reaccess-site
+python3 serve.py
 ```
 
-Publication metadata will be updated when available.
+Open http://localhost:8000/. To use another port, run `python3 serve.py --port 8001`.
 
-## License
+## Updating and deploying
 
-See [LICENSE](LICENSE) for the repository's MIT license. The project website's design credits and third-party asset licenses are documented on the `gh-pages` branch; paper and research assets remain with their respective authors.
+Edit `index.html`, `styles.css`, or `app.js`, preview the result, and push the changes to `gh-pages`.
+
+In the repository's **Settings → Pages**, the publishing source is **Deploy from a branch**, with **gh-pages** and **/ (root)** selected. `.nojekyll` keeps the existing static files intact. Asset links are relative so the page works under the `/reaccess/` project path.
+
+## Research assets
+
+- The motivation, framework, efficiency, and visualization PDFs are copied unchanged from the paper project.
+- Table 2 and Table 3 are cropped from the compiled paper PDF and rendered as images. They are not rebuilt as HTML tables.
+- High-resolution PNG previews are in `assets/figures/`; the original PDFs and compiled manuscript are in `assets/pdf/`.
+- `assets/provenance.json` records the source files, hashes, rendering dimensions, and table crop locations.
+- Every research figure on the page supports enlargement and links to its PDF.
+
+The optional `scripts/prepare_assets.py` helper rebuilds these assets from the authors' manuscript source. It expects a sibling `CVPR2027__Arxiv_` directory and requires Tectonic, Poppler, PyMuPDF, and Pillow. The manuscript source is not included in this branch; the committed assets are sufficient to view and deploy the site.
+
+## Design credits and licenses
+
+The page design was adapted from [Academic Project Page Template](https://github.com/eliahuhorwitz/Academic-project-page-template) and [Nerfies](https://github.com/nerfies/nerfies.github.io), with a custom layout, typography, and figure viewer. [Academic Project Astro Template](https://github.com/RomanHauksson/academic-project-astro-template) was also reviewed as a design reference.
+
+- Website design is shared under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), with attribution in the page footer.
+- The repository's existing [MIT license](LICENSE) is retained. It does not replace the separate terms for the website design, fonts, or paper assets.
+- The locally hosted Manrope font uses the SIL Open Font License; see [assets/fonts/OFL.txt](assets/fonts/OFL.txt).
+- The paper and research figures remain the property of their respective authors.

@@ -1,0 +1,105 @@
+{
+  "source_project": "../CVPR2027__Arxiv_",
+  "paper_pages": 18,
+  "paper_sha256": "baf908966488c276a198ad29e3a48d33b268ab26f36f4e9dfb320ace1d148b74",
+  "compilation": "Tectonic; OT1 font encoding added only to a temporary source copy to preserve pdfLaTeX Times fonts.",
+  "rendering": "Poppler pdftoppm; PDF figures copied unchanged; tables cropped from compiled paper without redrawing.",
+  "assets": {
+    "motivation": {
+      "pdf": "assets/pdf/motivation.pdf",
+      "png": "assets/figures/motivation.png",
+      "pdf_sha256": "76384e75faac3d05d8d0630ec12a53d6eee863a6c91a9cbda254f318a11ca0dd",
+      "png_sha256": "fc3011ff9b661c130c19e48a95dc5def11446a4d291d316f829e3e1b7e5101cf",
+      "pixels": [
+        3200,
+        1497
+      ],
+      "source": "figure/motivation.pdf",
+      "source_sha256": "76384e75faac3d05d8d0630ec12a53d6eee863a6c91a9cbda254f318a11ca0dd",
+      "original_pdf_unchanged": true
+    },
+    "framework": {
+      "pdf": "assets/pdf/framework.pdf",
+      "png": "assets/figures/framework.png",
+      "pdf_sha256": "f5b32ccc7afa01d65634ab8dcff815d066da3b1f4b3db4625f4c74ee34bbf75e",
+      "png_sha256": "c91c6a706823ca6894344648f09f292f95ab6876306e39a999cccf1fe86b766c",
+      "pixels": [
+        3200,
+        1300
+      ],
+      "source": "figure/framework.pdf",
+      "source_sha256": "f5b32ccc7afa01d65634ab8dcff815d066da3b1f4b3db4625f4c74ee34bbf75e",
+      "original_pdf_unchanged": true
+    },
+    "visualization": {
+      "pdf": "assets/pdf/visualization.pdf",
+      "png": "assets/figures/visualization.png",
+      "pdf_sha256": "5051d875c0864c37f9810a2bc41a3d7300175d5d91c9aac2dc6ae1f2425e20e9",
+      "png_sha256": "00179bf19cb74b406b2bc0857eb041e51daee73495d244becd4c523fdba85318",
+      "pixels": [
+        3200,
+        1645
+      ],
+      "source": "figure/visualization.pdf",
+      "source_sha256": "5051d875c0864c37f9810a2bc41a3d7300175d5d91c9aac2dc6ae1f2425e20e9",
+      "original_pdf_unchanged": true
+    },
+    "efficiency": {
+      "pdf": "assets/pdf/efficiency.pdf",
+      "png": "assets/figures/efficiency.png",
+      "pdf_sha256": "4c5df62365d874474d71035180f1a3d347dbe4fd0504d91235e9262199e82ea5",
+      "png_sha256": "ee0bee6463a3a8670134f2cfeaf65fc418061beff8c25365ae25ff4ced675f4c",
+      "pixels": [
+        2400,
+        1392
+      ],
+      "source": "figure/efficiency.pdf",
+      "source_sha256": "4c5df62365d874474d71035180f1a3d347dbe4fd0504d91235e9262199e82ea5",
+      "original_pdf_unchanged": true
+    },
+    "table2": {
+      "pdf": "assets/pdf/table2.pdf",
+      "png": "assets/figures/table2.png",
+      "pdf_sha256": "c428193ea261592c013ce6a721f1915741d4da74c3c60fa2a76779112fa68843",
+      "png_sha256": "7a0ba1bb0ec310396ab3daa0009334896f0effacb139f6c68c4384da3ac18fc8",
+      "pixels": [
+        3200,
+        1256
+      ],
+      "source": "main.tex (compiled)",
+      "table_source": "table/main.tex",
+      "latex_label": "tab:main_results",
+      "table_number": 2,
+      "paper_page": 6,
+      "crop_box_pdf_points": [
+        55.50001525878906,
+        69.8667221069336,
+        556.502685546875,
+        266.4814453125
+      ],
+      "caption": "Table 2. Performance on general visual understanding across various VLM backbones."
+    },
+    "table3": {
+      "pdf": "assets/pdf/table3.pdf",
+      "png": "assets/figures/table3.png",
+      "pdf_sha256": "209be9a63f4b31b86d09a6b5957260714190ba04938ba91e8e1ef86aa18aab47",
+      "png_sha256": "14b0419f4aa86514c561e71fe498243db5d16a548f1e26ea6d7c415955d28f05",
+      "pixels": [
+        3200,
+        1741
+      ],
+      "source": "main.tex (compiled)",
+      "table_source": "table/baseline.tex",
+      "latex_label": "tab:baseline_comparison",
+      "table_number": 3,
+      "paper_page": 6,
+      "crop_box_pdf_points": [
+        77.07777404785156,
+        267.65252685546875,
+        534.9222412109375,
+        516.657958984375
+      ],
+      "caption": "Table 3. Comparison with representative methods based on Qwen2.5-VL-7B. † denotes single-preﬁll variants."
+    }
+  }
+}
