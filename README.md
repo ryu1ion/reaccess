@@ -26,5 +26,10 @@ During a single visual prefill, ReAccess builds a compact associative memory. Su
 ## Citation
 
 ```bibtex
-
+@article{chen2026reaccess,
+  title={ReAccess: Look Once, Stay Focused with Efficient Test Time Memory},
+  author={Chen, Tianhao and Fan, Yilong and Wu, Yuheng and Hu, Xiaobin and Lee, Dongman},
+  journal={arXiv preprint arXiv:2611.20936},
+  year={2026}
+}
 ```
