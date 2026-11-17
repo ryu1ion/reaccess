@@ -5,7 +5,7 @@
 **Tianhao Chen · Yilong Fan · Yuheng Wu · Xiaobin Hu · Dongman Lee**  
 KAIST · Tianjin University · National University of Singapore
 
-[Project Page](https://ryu1ion.github.io/reaccess/) · [Paper](https://ryu1ion.github.io/reaccess/assets/pdf/reaccess-paper.pdf)
+[Project Page](https://ryu1ion.github.io/reaccess/) · [Paper](https://arxiv.org/abs/2611.20936)
 
 ## Code release
 
